@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+<head>
+    <title>彩虹米啊彩虹米</title>
+    <style type="text/css">
+        *{margin: 0;padding: 0;position:relative;}
+        body{background: linear-gradient(rgba(0,150,237,1), rgba(210,243,226,0.6)) no-repeat fixed;overflow:hidden;}
+        .Layer1{position:absolute; left:0px; top:0px; width:100%; height:100%}
+        .head{height: 50px;background: rgba(78,180,252,1);text-align:center;color:white;line-height: 50px; }
+        .main{margin: 130px 20px 0px 20px}
+        .grid{margin:0;padding:5px;background:white;position:relative;
+              border-radius:5px;border-color:white;border:1px solid gray;overflow:hidden;border-radius: 5px;}
+        .grid img{position:absolute;}
+        input[type="text"],input[type="password"]{display:block;width: 100%;height: 30px;border:0;margin-left:30px;}
+        .select{text-align:center;margin:20px;}
+        .Login{background: rgb(0,128,1);text-align:center;color:white;border-radius: 5px;padding:10px;cursor: pointer;}
+        .Login:hover{background: rgb(0,75,0);user-select: none;-webkit-user-select: none;}
+        .Forget{float:right;color:rgba(155,183,158);}
+    </style>
+</head>
+<body>
+    <div class="Layer1"></div>
+    <div class="head shake">彩虹米</div>
+    <div class="main">
+    <div class="grid shake">
+    <img src="http://www.easyicon.net/api/resizeApi.php?id=1197953&size=24"style="left:5px;top:5px"/>
+    <input type="text" id="phone" name="phone" class="phone" placeholder="手机号"/>
+    <hr/>
+    <img src="http://www.easyicon.net/api/resizeApi.php?id=1198325&size=16" style="left:9px;top:40px"/>
+    <input type="password" id="password" name="password" class="password" placeholder="请输入密码"/>
+    </div>
+    <div class="select">
+    <label class="shake" for="select1"><input type="radio" name="select" id="select1" checked="checked" />家长版</label>
+    <label class="shake" for="select2"><input type="radio" name="select" id="select2" />教师版</label>
+    <label class="shake" for="select3"><input type="radio" name="select" id="select3" />监管员</label>
+    </div>
+    <div class="Login shake">登录</div>
+    <div class="Forget shake">忘记密码?</div>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(".Login").on("click", function () {
+            $(".shake").each(function () {
+                d = Math.random() * 4000;
+                $(this).delay(d).show(function(){drop($(this));});
+                })
+        });
+
+        function drop(shake) {
+                var tx=0,ty=0,r=0,s=0;
+                var a = Math.random()>0.5?1:-1;
+                var b = -(Math.random()*0.5+0.5)*5;
+                shake.animate({ opacity: 1 }, {
+                    step: function (n,fx) { 
+if(fx.pos<0.3)
+{
+r+= (Math.random()-0.5) * 4;
+shake.css("transform", "rotate(" + r + "deg)");
+}
+else if(fx.pos<0.6)
+{
+r+=a;
+tx+=a;
+ty+=(0.6-fx.pos)*b/0.3
+r+=a;
+shake.css("transform", "translate(" + tx + "px," + ty + "px) rotate(" + r + "deg)");
+}
+else
+{
+s++;
+ty+=s;
+shake.css("transform", "translate(" + tx + "px," + ty + "px) rotate(" + r + "deg)");
+}},
+                    duration: 5000
+            })
+        }
+    </script>
+</body>
+</html>

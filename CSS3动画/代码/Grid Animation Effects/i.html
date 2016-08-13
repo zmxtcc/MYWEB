@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <title>¸ñ×Ó¶¯»­1</title>
+    <!--link rel="stylesheet" type="text/css" href="css.css" /-->
+    <style type="text/css">
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+        body
+        {
+            text-align: center;
+            overflow: hidden;
+        }
+        .grid
+        {
+            width: 600px;
+            height: 300px;
+            margin: 100px auto 50px auto;
+            perspective: 500px;
+        }
+        .grid img
+        {
+            width: 60px;
+            height: 60px;
+            display: block;
+            float: left;
+        }
+        .animate
+        {
+            font: 12px;
+            font-weight: 400;
+            text-transform: uppercase;
+            background: rgb(0,100,0);
+            color: White;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cusor: pointer;
+        }
+        .animate:hover
+        {
+            background: rgb(0,75,0);
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+    </div>
+    <span class="animate">animate</span>
+    <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="jquery.easing.min.js"></script>
+    <script type="text/javascript">
+        var img = "", count = 50;
+        for (i = 1; i < 51; i++) {
+            img += '<img src="' + i + '.jpg" />';
+        }
+        $(".grid").append(img);
+
+        var d = 0; //delay
+        var ry, tz, s; //transform params
+        $(".animate").on("click", function () {
+            $("img").each(function () {
+                d = Math.random() * 1000;
+                $(this).delay(d).animate({ opacity: 0 }, {
+                    step: function (n, fx) { s = 1 - fx.pos; $(this).css("transform", "scale(" + s + ")"); },
+                    duration: 700
+                })
+            }).promise().done(function () { storm(); })
+        });
+
+        function storm() {
+            $("img").each(function () {
+                d = Math.random() * 1000;
+                $(this).delay(d).animate({ opacity: 1 }, {
+                    step: function (n) { ry = (1 - n) * 360; tz = (1 - n) * 1000; $(this).css("transform", "rotateY(" + ry + "deg) translateZ(" + tz + "px)") },
+                    duration: 3000,
+                    easing: "easeOutQuint"
+                })
+            })
+        }
+    </script>
+</body>
+</html>
